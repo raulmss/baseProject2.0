@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addroleToUser(String email, String roleName) throws RoleNotFoundException {
+    public void addRoleToUser(String email, String roleName) throws RoleNotFoundException {
         var user = userRepo.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("No user found with the email: "+email));
         var role = roleRepo.findByName(roleName)
@@ -54,8 +54,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public AppUser getUserById(Long id) {
+        log.info("Fetching user {} by id", id);
+        return userRepo.findById(id).orElseThrow(() -> new UserNotFoundException("No user found with the id: "+id));
+    }
+
+
+    @Override
     public List<AppUser> getUsers() {
         log.info("Fetching all users");
         return userRepo.findAll();
     }
+
+
+    @Override
+    public void deleteUser(Long id) {
+        log.info("Deleting user with id {}", id);
+        userRepo.deleteById(id);
+    }
+
+
 }

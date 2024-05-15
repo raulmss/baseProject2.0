@@ -9,7 +9,11 @@ import java.util.List;
 public interface UserService {
     AppUser saveUser(AppUser user);
     Role saveRole(Role role);
-    void addroleToUser(String email, String roleName) throws RoleNotFoundException;
+    void addRoleToUser(String email, String roleName) throws RoleNotFoundException;
     AppUser getUser(String email);
+    AppUser getUserById(Long id);
     List<AppUser>getUsers();
+    void deleteUser(Long id);
+
+
 }
